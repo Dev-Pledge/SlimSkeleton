@@ -1,6 +1,6 @@
 {
   "name": "dev-pledge/slim-skeleton",
-  "description": "A Slim Framework skeleton application for rapid development",
+  "description": "A Slim Framework skeleton application for rapid development with Docker",
   "keywords": [
     "microframework",
     "rest",
