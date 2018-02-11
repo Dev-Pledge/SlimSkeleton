@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: api.dockerfile
+    environment:
+      docker: "true"
     volumes:
       - .:/var/www
       - ./logs:/var/www/logs
@@ -16,5 +18,14 @@ services:
       dockerfile: web.dockerfile
     ports:
       - 8080:80
-#  db:
-#    image:
+  mysql-db:
+    restart: always
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    volumes:
+     - ./data:/var/lib/mysql
+    ports:
+      - 3306:3306
