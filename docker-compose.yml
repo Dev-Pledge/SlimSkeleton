@@ -22,10 +22,10 @@ services:
     restart: always
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_ROOT_PASSWORD: 'test_pass'
       MYSQL_USER: 'test'
       MYSQL_PASS: 'pass'
     volumes:
      - ./data:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3307:3306

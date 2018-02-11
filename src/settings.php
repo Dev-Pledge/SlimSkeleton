@@ -18,7 +18,7 @@ return [
 
 		// MySQL settings
 		'database'               => [
-			'dsn'  => 'mysql:dbname=testdb;host=mysql-db',
+			'dsn'  => 'mysql:dbname=devpledge;host=mysql-db',
 			'user' => 'root',
 			'pass' => 'test_pass',
 		],
