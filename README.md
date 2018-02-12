@@ -20,10 +20,14 @@ Replace `[my-app-name]` with the desired directory name for your new application
 * Ensure `logs/` is web writeable.
 
 
-To run the application in development, you can also run this command. 
+To run the application in development, you can also run either of these command. 
 
 	docker-compose up
 
+or
+
+    composer start-docker
+    
 Run this command to run the test suite
 
 	composer test
