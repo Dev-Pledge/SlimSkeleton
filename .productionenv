@@ -1,0 +1,6 @@
+#TODO change these for production and add this file to .gitignore
+MYSQL_HOST="mysql-db"
+MYSQL_DB="devpledge"
+MYSQL_USER="root"
+MYSQL_PASSWORD="test_pass"
+JWT_SECRET="987ytgvbnytfcvbh4g3uwsjdcnfbr"

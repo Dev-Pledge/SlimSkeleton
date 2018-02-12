@@ -7,6 +7,7 @@ services:
       dockerfile: api.dockerfile
     environment:
       docker: "true"
+      production: "false"
     volumes:
       - .:/var/www
       - ./logs:/var/www/logs

@@ -13,6 +13,15 @@ if ( PHP_SAPI == 'cli-server' ) {
 require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
+$dotEnvFile = '.developmentenv';
+if ( isset( $_ENV['production'] ) && $_ENV['production'] == true ) {
+	$dotEnvFile = '.productionenv';
+}
+
+//https://github.com/vlucas/phpdotenv
+$dotEnv = new \Dotenv\Dotenv( __DIR__ . '/../', $dotEnvFile );
+$dotEnv->load();
+
 
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';

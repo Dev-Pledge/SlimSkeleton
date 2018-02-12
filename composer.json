@@ -25,7 +25,8 @@
     "slim/php-view": "^2.0",
     "monolog/monolog": "^1.17",
     "tomwright/extended-pdo": "^1.0",
-    "tomwright/json": "^1.0"
+    "tomwright/json": "^1.0",
+    "vlucas/phpdotenv": "^2.4"
   },
   "require-dev": {
     "phpunit/phpunit": ">=4.8 < 6.0",
@@ -45,7 +46,8 @@
     "process-timeout": 0
   },
   "scripts": {
-    "start": "php -S localhost:8080 -t public index.php",
+    "start-docker": "docker-compose up",
+    "start-php": "php -S localhost:8080 -t public index.php",
     "test": "phpunit"
   }
 }

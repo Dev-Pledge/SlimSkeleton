@@ -18,15 +18,15 @@ return [
 
 		// MySQL settings
 		'database'               => [
-			'dsn'  => 'mysql:dbname=devpledge;host=mysql-db',
-			'user' => 'root',
-			'pass' => 'test_pass',
+			'dsn'  => 'mysql:dbname=' . getenv( 'MYSQL_DB' ) . ';host=' . getenv( 'MYSQL_HOST' ),
+			'user' => getenv( 'MYSQL_USER' ),
+			'pass' => getenv( 'MYSQL_PASSWORD' ),
 		],
 
 		'security' => [
 			'jwt' => [
 				'algorithm' => 'SHA256',
-				'secret'    => 'asdasd',
+				'secret'    => getenv( 'JWT_SECRET' ),
 				'ttl'       => 3600,
 				'ttr'       => 7200,
 			],
