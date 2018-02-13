@@ -19,7 +19,7 @@ class Organisation
     /**
      * @var User[]
      */
-    private $users;
+    private $user;
 
     /**
      * @return string
@@ -51,9 +51,20 @@ class Organisation
      */
     public function setName(string $name): Organisation
     {
+	    /**
+	     * @var $org Organisation
+	     */
+	    $org->getUser();
         $this->name = $name;
         return $this;
     }
+
+	/**
+	 * @return User
+	 */
+	public function getUser():User {
+		return $this->user;
+	}
 
 
 }

@@ -5,7 +5,7 @@ namespace DevPledge\Framework\Controller;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use DevPledge\Framework\Repository\Organisation\OrganisationRepository;
+use DevPledge\Application\Repository\Organisation\OrganisationRepository;
 
 class OrganisationController
 {

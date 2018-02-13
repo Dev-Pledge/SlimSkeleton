@@ -9,11 +9,11 @@ use TomWright\Database\ExtendedPDO\ExtendedPDO;
 use DevPledge\Application\Repository\Organisation\OrganisationMySQLRepository;
 use DevPledge\Application\Repository\Organisation\OrganisationRepository;
 
-class RepositoryServiceProvider {
+class FactoryServiceProvider {
 
 	public function provide( ContainerInterface $c ) {
-		$c[ OrganisationRepository::class ] = function ( $c ) {
-			return new OrganisationMySQLRepository( $c->get( ExtendedPDO::class ), $c->get( OrganisationFactory::class ) );
+		$c[ OrganisationFactory::class ] = function ( $c ) {
+			return new OrganisationFactory();
 		};
 	}
 
