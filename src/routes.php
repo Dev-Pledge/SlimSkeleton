@@ -2,8 +2,8 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use DevPledge\Application\Controller\Auth\AuthController;
-use DevPledge\Application\Controller\OrganisationController;
+use DevPledge\Framework\Controller\Auth\AuthController;
+use DevPledge\Framework\Controller\OrganisationController;
 
 // Routes
 
@@ -20,7 +20,7 @@ $app->group('', function () use ($app) {
 
     $app->group('/organisation', function () use ($app) {
 
-        $app->get('', OrganisationController::class . ':getOrganisation');
+        $app->get('/{id}', OrganisationController::class . ':getOrganisation');
 
     });
 

@@ -1,7 +1,7 @@
 <?php
 // DIC configuration
 
-use DevPledge\Application\Services\ServiceProvider;
+use DevPledge\Framework\Services\ServiceProvider;
 
 $container = $app->getContainer();
 

@@ -17,6 +17,11 @@ class Organisation
     private $name;
 
     /**
+     * @var User[]
+     */
+    private $users;
+
+    /**
      * @return string
      */
     public function getId(): string

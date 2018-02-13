@@ -1,6 +1,6 @@
 <?php
 
-namespace DevPledge\Application\Services;
+namespace DevPledge\Framework\Services;
 
 
 use Psr\Container\ContainerInterface;

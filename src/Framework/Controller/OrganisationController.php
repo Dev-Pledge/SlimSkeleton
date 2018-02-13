@@ -1,11 +1,11 @@
 <?php
 
-namespace DevPledge\Application\Controller;
+namespace DevPledge\Framework\Controller;
 
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use DevPledge\Application\Repository\Organisation\OrganisationRepository;
+use DevPledge\Framework\Repository\Organisation\OrganisationRepository;
 
 class OrganisationController
 {
@@ -41,7 +41,7 @@ class OrganisationController
         $organisation = $this->organisationRepository->getOrganisation($organisationId);
         if ($organisation === null) {
             return $res->withJson([
-                'OrganisationController not found'
+                'Organisation not found'
             ], 404);
         }
 

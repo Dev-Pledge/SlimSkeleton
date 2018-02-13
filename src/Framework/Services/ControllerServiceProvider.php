@@ -1,11 +1,11 @@
 <?php
 
-namespace DevPledge\Application\Services;
+namespace DevPledge\Framework\Services;
 
 
 use Psr\Container\ContainerInterface;
-use DevPledge\Application\Controller\Auth\AuthController;
-use DevPledge\Application\Controller\OrganisationController;
+use DevPledge\Framework\Controller\Auth\AuthController;
+use DevPledge\Framework\Controller\OrganisationController;
 use DevPledge\Application\Repository\Organisation\OrganisationRepository;
 use DevPledge\Application\Security\JWT\JWT;
 
@@ -19,7 +19,8 @@ class ControllerServiceProvider
         };
 
         $c[OrganisationController::class] = function ($c) {
-            return new OrganisationController($c->get(OrganisationRepository::class));
+            $repository = $c->get(OrganisationRepository::class);
+            return new OrganisationController($repository);
         };
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace DevPledge\Application\Controller\Auth;
+namespace DevPledge\Framework\Controller\Auth;
 
 
 use Slim\Http\Request;
