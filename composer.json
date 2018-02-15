@@ -1,11 +1,15 @@
 {
   "name": "dev-pledge/slim-skeleton",
-  "description": "A Slim Framework skeleton application for rapid development with Docker",
+  "description": "A Slim Framework skeleton application for rapid development with Docker And Swoole Using Domain Driven Development DDD",
   "keywords": [
     "microframework",
     "rest",
     "router",
-    "psr7"
+    "psr7",
+    "swoole",
+    "domain driven development",
+    "docker",
+    "Framework Application Domain"
   ],
   "homepage": "https://github.com/Dev-Pledge/SlimSkeleton",
   "license": "MIT",
