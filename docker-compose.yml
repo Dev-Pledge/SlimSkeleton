@@ -13,12 +13,18 @@ services:
       - ./logs:/var/www/logs
     ports:
       - 9000:9000
+      - 9501:9501
+
   web:
     build:
       context: .
       dockerfile: web.dockerfile
+    volumes:
+      - ./config:/etc/nginx/conf.d
     ports:
-      - 8080:80
+      - 80:80
+      - 443:443
+
   mysql-db:
     restart: always
     image: mysql:latest

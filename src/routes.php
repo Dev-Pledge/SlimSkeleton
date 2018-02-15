@@ -15,27 +15,36 @@ use DevPledge\Framework\Controller\OrganisationController;
 //    return $this->renderer->render($response, 'index.phtml', $args);
 //});
 
+$app->group( '', function () use ( $app ) {
 
-$app->group('', function () use ($app) {
+	$app->get( '/swooletest', function () use ( $app ) {
 
-    $app->group('/organisation', function () use ($app) {
+		shell_exec( 'php /var/www/swooletest.php > /dev/null 2>/dev/null &' );
 
-        $app->get('/{id}', OrganisationController::class . ':getOrganisation');
+	} );
 
-    });
+} );
 
-})->add($jwtMiddleware);
+$app->group( '', function () use ( $app ) {
 
-$app->group('', function () use ($app, $jwtRefreshMiddleware) {
+	$app->group( '/organisation', function () use ( $app ) {
 
-    $app->group('/auth', function () use ($app, $jwtRefreshMiddleware) {
+		$app->get( '/{id}', OrganisationController::class . ':getOrganisation' );
 
-        $app->post('/login', AuthController::class . ':login');
+	} );
 
-        $app
-            ->post('/refresh', AuthController::class . ':refresh')
-            ->add($jwtRefreshMiddleware);
+} )->add( $jwtMiddleware );
 
-    });
+$app->group( '', function () use ( $app, $jwtRefreshMiddleware ) {
 
-});
+	$app->group( '/auth', function () use ( $app, $jwtRefreshMiddleware ) {
+
+		$app->post( '/login', AuthController::class . ':login' );
+
+		$app
+			->post( '/refresh', AuthController::class . ':refresh' )
+			->add( $jwtRefreshMiddleware );
+
+	} );
+
+} );

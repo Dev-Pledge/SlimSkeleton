@@ -1,6 +1,9 @@
 #TODO change these for production and add this file to .gitignore
-MYSQL_HOST="mysql-db"
+MYSQL_HOST="123.123.123.01"
 MYSQL_DB="devpledge"
-MYSQL_USER="root"
-MYSQL_PASSWORD="test_pass"
+MYSQL_USER="live_user"
+MYSQL_PASSWORD="0918234gbrnf8"
 JWT_SECRET="987ytgvbnytfcvbh4g3uwsjdcnfbr"
+SWOOLE_PORT="9501"
+API_DOMAIN="123.123.123.02"
+#OR API_DOMAIN="api.web.co.uk"

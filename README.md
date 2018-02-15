@@ -32,4 +32,106 @@ Run this command to run the test suite
 
 	composer test
 
+To resolve to the correct domain you want to use
+
+change files:
+
+vars inside [] are to be changed if needed!
+    
+    config/swoolehost.conf
+    
+        server{
+            listen 80;
+            listen [::]:80;
+            listen 443;
+            listen [::]:443;
+        
+            server_name [api.swoole.co.uk];
+        
+            location /
+            {
+                proxy_pass http://[api:9501];
+            }
+        }
+        
+    config/webhost.conf
+        server {
+            listen 80;
+            listen 443;
+            index index.php index.html;
+            root /var/www/public;
+        
+            server_name [api.web.co.uk];
+        
+            location / {
+                try_files $uri /index.php?$args;
+            }
+        
+            location ~ \.php$ {
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass [api:9000];
+                fastcgi_index index.php;
+                include fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_param PATH_INFO $fastcgi_path_info;
+            }
+        }
+        
+    .developmentenv
+        
+        MYSQL_HOST="[mysql-db]"
+        MYSQL_DB="devpledge"
+        MYSQL_USER="root"
+        MYSQL_PASSWORD="test_pass"
+        JWT_SECRET="987ytgvbnytfcvbh4g3uwsjdcnfbr"
+        SWOOLE_PORT="[9501]"
+        API_DOMAIN="[api]"
+        
+    docker-compose.yml
+    
+        version: "3"
+        
+        services:
+          [api]:
+            build:
+              context: .
+              dockerfile: api.dockerfile
+            environment:
+              docker: "true"
+              production: "false"
+            volumes:
+              - .:/var/www
+              - ./logs:/var/www/logs
+            ports:
+              - 9000:9000
+              - [9501:9501]
+        
+          web:
+            build:
+              context: .
+              dockerfile: web.dockerfile
+            volumes:
+              - ./config:/etc/nginx/conf.d
+            ports:
+              - 80:80
+              - 443:443
+        
+          [mysql-db]:
+            restart: always
+            image: mysql:latest
+            environment:
+              MYSQL_ROOT_PASSWORD: 'test_pass'
+              MYSQL_USER: 'test'
+              MYSQL_PASS: 'pass'
+            volumes:
+             - ./data:/var/lib/mysql
+            ports:
+              - [3307:3306]
+    
+    /etc/hosts
+    
+        #add lines so your broswer resolves to correct domains on your MAC or Dev Machine
+        127.0.0.1       [api.web.co.uk]
+        127.0.0.1       [api.swoole.co.uk]
+
 That's it! Now go build something cool.
