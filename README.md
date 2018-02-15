@@ -128,10 +128,12 @@ vars inside [] are to be changed if needed!
             ports:
               - [3307:3306]
     
-    /etc/hosts
+    /etc/hosts (access by sudo nano /etc/hosts) 
     
         #add lines so your broswer resolves to correct domains on your MAC or Dev Machine
         127.0.0.1       [api.web.co.uk]
         127.0.0.1       [api.swoole.co.uk]
 
 That's it! Now go build something cool.
+
+This needs some work before this could go to PRODUCTION proper - but it will get you developing!
