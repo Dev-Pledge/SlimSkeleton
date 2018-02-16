@@ -19,6 +19,9 @@ Replace `[my-app-name]` with the desired directory name for your new application
 * Point your virtual host document root to your new application's `public/` directory.
 * Ensure `logs/` is web writeable.
 
+To set up sentry
+
+    docker-compose run --rm sentry upgrade
 
 To run the application in development, you can also run either of these command. 
 
@@ -27,6 +30,10 @@ To run the application in development, you can also run either of these command.
 or
 
     composer start-docker
+    
+    gem install docker-sync
+    
+    docker-sync up
     
 Run this command to run the test suite
 
