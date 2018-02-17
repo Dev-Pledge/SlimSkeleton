@@ -14,12 +14,12 @@ services:
       POSTGRES_DBUSER: "sentry"
       POSTGRES_DBPASS: "sentry"
     volumes:
-       - ./data/postgres:/var/lib/postgresql/data
+       - ./data/postgres:/var/lib/postgresql/data:cached
 
   sentry:
     image: sentry:latest
     volumes:
-      - ./data/sentry:/data
+      - ./data/sentry:/data:cached
     depends_on:
        - redis
        - postgres
@@ -70,8 +70,8 @@ services:
       docker: "true"
       production: "false"
     volumes:
-      - .:/var/www
-      - ./logs:/var/www/logs
+      - .:/var/www:cached
+      - ./logs:/var/www/logs:cached
     ports:
       - 9000:9000
       - 9501:9501
@@ -81,7 +81,7 @@ services:
       context: .
       dockerfile: web.dockerfile
     volumes:
-      - ./config:/etc/nginx/conf.d
+      - ./config:/etc/nginx/conf.d:cached
     depends_on:
       - sentry
       - api
@@ -97,6 +97,6 @@ services:
       MYSQL_USER: 'test'
       MYSQL_PASS: 'pass'
     volumes:
-     - ./data/mysql:/var/lib/mysql
+     - ./data/mysql:/var/lib/mysql:cached
     ports:
       - 3307:3306

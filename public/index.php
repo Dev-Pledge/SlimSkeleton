@@ -66,3 +66,5 @@ $t( 'Routes' );
  */
 $app->run();
 $t( 'Run' );
+
+echo 'poo';
