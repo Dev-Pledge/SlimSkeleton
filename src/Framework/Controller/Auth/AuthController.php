@@ -3,11 +3,15 @@
 namespace DevPledge\Framework\Controller\Auth;
 
 
+use DevPledge\Domain\Permissions\Action;
+use DevPledge\Domain\Permissions\Permissions;
+use DevPledge\Domain\Permissions\Resource;
+use DevPledge\Integrations\Security\JWT\JWT;
+use DevPledge\Integrations\Security\JWT\Token;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use TomWright\JSON\Exception\JSONEncodeException;
-use DevPledge\Application\Security\JWT\JWT;
-use DevPledge\Application\Security\JWT\Token;
+
 
 class AuthController
 {
@@ -19,6 +23,7 @@ class AuthController
 
     /**
      * AuthController constructor.
+     *
      * @param JWT $jwt
      */
     public function __construct(JWT $jwt)
@@ -29,6 +34,7 @@ class AuthController
     /**
      * @param Request $request
      * @param Response $response
+     *
      * @return Response
      */
     public function login(Request $request, Response $response)
@@ -41,8 +47,9 @@ class AuthController
         if ($username === 'tom' && $password === 'password') {
             try {
                 $token = $this->jwt->generate((object)[
+                    'name' => 'Tommy Bum Bum',
                     'username' => $username,
-                    'password' => $password,
+                    'perms' => $this->createWildcardPermissions(),
                 ]);
 
                 return $response->withJson(['token' => $token]);
@@ -57,6 +64,7 @@ class AuthController
     /**
      * @param Request $request
      * @param Response $response
+     *
      * @return Response
      */
     public function refresh(Request $request, Response $response)
@@ -73,6 +81,76 @@ class AuthController
         }
 
         return $response->withJson(['token' => $newToken]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     *
+     * @return Response
+     */
+    public function outputTokenPayload(Request $request, Response $response)
+    {
+        /**
+         * @var Token $token
+         */
+        $token = $request->getAttribute(Token::class);
+
+        return $response->withJson(['payload' => $token->getData()]);
+    }
+
+    /**
+     * Generates a permissions object that gives access to all
+     * actions on all known resources.
+     *
+     * @return Permissions
+     */
+    private function createWildcardPermissions(): Permissions
+    {
+        $p = new Permissions();
+        $p
+            ->addResource((new Resource())
+                ->setName('organisations')
+                ->addAction((new Action())
+                    ->setName('create'))
+                ->addAction((new Action())
+                    ->setName('read'))
+                ->addAction((new Action())
+                    ->setName('update'))
+                ->addAction((new Action())
+                    ->setName('delete')))
+            ->addResource((new Resource())
+                ->setName('members')
+                ->addAction((new Action())
+                    ->setName('create'))
+                ->addAction((new Action())
+                    ->setName('read'))
+                ->addAction((new Action())
+                    ->setName('update'))
+                ->addAction((new Action())
+                    ->setName('delete')))
+            ->addResource((new Resource())
+                ->setName('problem')
+                ->addAction((new Action())
+                    ->setName('create'))
+                ->addAction((new Action())
+                    ->setName('read'))
+                ->addAction((new Action())
+                    ->setName('update'))
+                ->addAction((new Action())
+                    ->setName('delete')))
+            ->addResource((new Resource())
+                ->setName('pledge')
+                ->addAction((new Action())
+                    ->setName('create'))
+                ->addAction((new Action())
+                    ->setName('read'))
+                ->addAction((new Action())
+                    ->setName('update'))
+                ->addAction((new Action())
+                    ->setName('delete')));
+
+        return $p;
     }
 
 }

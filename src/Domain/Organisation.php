@@ -17,32 +17,13 @@ class Organisation
     private $name;
 
     /**
-     * @var User[]
-     */
-    private $user;
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
      * @param string $id
+     * @return Organisation
      */
-    public function setId(string $id): void
+    public function setId(string $id): Organisation
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
+        return $this;
     }
 
     /**
@@ -51,20 +32,24 @@ class Organisation
      */
     public function setName(string $name): Organisation
     {
-	    /**
-	     * @var $org Organisation
-	     */
-	    $org->getUser();
         $this->name = $name;
         return $this;
     }
 
-	/**
-	 * @return User
-	 */
-	public function getUser():User {
-		return $this->user;
-	}
+    /**
+     * @return string
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
 
+    /**
+     * @return string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
 
 }
